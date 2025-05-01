@@ -24,7 +24,7 @@
 
 ---
 
-- MLOps
+- Agile
   - [ ] [Agile Fundamentals: Including Scrum & Kanban](https://www.udemy.com/course/agile-fundamentals-scrum-kanban-scrumban/)
   - [ ] [Complete Agile Scrum Master Certification Training](https://www.udemy.com/course/complete-agile-scrum-master-training-exam-simulator/)
 
