@@ -44,3 +44,30 @@ docker compose down
 # clean up with removing all volumes #
 docker compose down -v
 ```
+
+
+For Named Volumes, they should be mentioned in the YAML files at the end, eg:
+
+```yaml
+# containers #
+services:
+
+  # mongodb container #
+  mongodb:
+    image: 'mongo'
+    volumes:
+      - data:/data/db
+
+  # backend container #
+  goals-backend:
+    image: 'goals-node'
+    volumes:
+      - logs:/app/logs
+
+# adding named volumes #
+volumes:
+  data:
+  logs:
+```
+
+
