@@ -83,3 +83,52 @@ In summary, the key difference is that `CMD` is used to specify the default comm
 <ins>For Example:</ins>
 
 `ENTRYPOINT` allows you to run the command `init` instead of `npm init`, or `install` instead of `npm install` as we set `ENTRYPOINT ["npm"]`
+
+ Additional Explanation
+
+`ENTRYPOINT` defines the command, while `CMD` defines the default arguments.
+
+If both exist, Docker forms the final command as:
+
+`ENTRYPOINT` + `CMD`
+
+
+Example:
+
+```Dockerfile
+ENTRYPOINT ["echo"]
+CMD ["Hello"]
+```
+
+Runs: `echo Hello`
+
+If you provide new arguments at runtime:
+
+```bash
+docker run myimage Bye
+```
+
+Runs: `echo Bye` (`CMD` replaced, `ENTRYPOINT` stays)
+
+CMD can be completely replaced by specifying a new command in docker run, but `ENTRYPOINT` cannot unless you use the `--entrypoint` flag:
+
+```bash
+docker run --entrypoint ls myimage /
+```
+
+Replaces `ENTRYPOINT` entirely.
+
+ Summary Table
+
+| Instruction | Role | Can Be Overridden? | How to Override
+|------------:|------------:|------------:|------------:|
+|`CMD`|Default command or arguments|Yes|By specifying a new command after image name|
+|`ENTRYPOINT`|Main executable|No|Only with `--entrypoint` flag|
+|`CMD` + `ENTRYPOINT`|`CMD` = default args for `ENTRYPOINT`|`CMD` only|`ENTRYPOINT` stays active|
+
+ In short:
+
+- `ENTRYPOINT` = "What to run"
+- `CMD` = "With what default arguments"
+- You can easily replace CMD, but ENTRYPOINT stays fixed unless you explicitly override it.
+
